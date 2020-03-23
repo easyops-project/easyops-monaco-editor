@@ -36,7 +36,7 @@ monaco.editor.defineTheme('myCoolTheme', {
 });
 
 // create Monaco editor
-const editor = monaco.editor.create(document.getElementById("container")!, {
+const editor = monaco.editor.create(document.getElementById("editor")!, {
     language: "eops",
     theme: "myCoolTheme",
     value: ""
