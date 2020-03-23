@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@alanj1998/easyops-parser@^1.0.9":
-  version "1.0.11"
-  resolved "https://npm.pkg.github.com/download/@alanj1998/easyops-parser/1.0.11/7cb403c6b09a7f052e4b6c71ccf7a0e8f95d52d499e356057c0e62026e20b486#aa5c7028d09b3ddc7589432f4db3a5d1e592b2cc"
-  integrity sha512-ES+tIiEcfpUieIbW3s+wCcl4FgLy1hAOk1dv8AF5ApE5rC4iLbFv0+Z1gZ0/6vdUJz0J43irsuA/0sKxtI5Sbw==
+"@alanj1998/easyops-parser@^1.0.12":
+  version "1.0.12"
+  resolved "https://npm.pkg.github.com/download/@alanj1998/easyops-parser/1.0.12/37c8f16f0f9958b5b78d0529469eaff2ade68cd5cfd683263bf2176089884dd5#89affaa0cb4982a500c2e7e29d57b2967d06c48d"
+  integrity sha512-USftr0u4KUAC44D2+fodz/K6xPAfZnJrEOpPrfVrZari4cX3mITEvr9HhIlSZhoISNEp61avHuvPjNsQ/ckuQA==
   dependencies:
     node-addon-api "^1.7.1"
 

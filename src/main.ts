@@ -1,5 +1,7 @@
-require('monaco-editor-core');
+require("./routing");
+
+require("monaco-editor-core");
 (self as any).MonacoEnvironment = {
-    getWorkerUrl: () => './editor.worker.bundle.js'
-}
-require('./client');
+  getWorkerUrl: () => "./editor.worker.bundle.js"
+};
+require("./client");
