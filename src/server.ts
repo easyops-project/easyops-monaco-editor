@@ -57,8 +57,6 @@ server.on('upgrade', (request: http.IncomingMessage, socket: net.Socket, head: B
             try {
                 webSocket.on('message', (data) => {
                     const msg: { code: string } = JSON.parse(data)
-                    console.log(data)
-                    console.log(msg)
                     const res = Validate(msg.code)
 
                     webSocket.send(JSON.stringify({ errors: res }))
