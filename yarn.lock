@@ -3,9 +3,9 @@
 
 
 "@alanj1998/easyops-parser@^1.0.12":
-  version "1.0.12"
-  resolved "https://npm.pkg.github.com/download/@alanj1998/easyops-parser/1.0.12/37c8f16f0f9958b5b78d0529469eaff2ade68cd5cfd683263bf2176089884dd5#89affaa0cb4982a500c2e7e29d57b2967d06c48d"
-  integrity sha512-USftr0u4KUAC44D2+fodz/K6xPAfZnJrEOpPrfVrZari4cX3mITEvr9HhIlSZhoISNEp61avHuvPjNsQ/ckuQA==
+  version "1.0.13"
+  resolved "https://npm.pkg.github.com/download/@alanj1998/easyops-parser/1.0.13/6b44f6fcc7024eace65e63c1cbdbbc135c5e3be96a6c4fc0289688c44fc70bc8#7832bf2d32bbbe74a13c3eac79c1f0b672870d42"
+  integrity sha512-QwvMZtW3Y4iUVGQKHJ7T6Yi4S5g9S6mvgkqrgy/9es1qNf5HxR9yxVomD1MfM6keqA7G1HxULrZB4F8a9dwXTw==
   dependencies:
     node-addon-api "^1.7.1"
 
@@ -55,6 +55,13 @@
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/@types/normalize-url/-/normalize-url-1.9.1.tgz#d19c631dfd938e5113322efc076e74185a7f5aaa"
   integrity sha512-NWKCFU+yFaTY4yY1qNiAnlb085k2ZUKbgJ/ViZka13T90uQ7e17htntVOE5y2RcnTpoHvjMp4hyhZoU0mDdSlA==
+
+"@types/opn@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@types/opn/-/opn-5.5.0.tgz#f7b80ae1269b76d621290befb568c87e7511e3ac"
+  integrity sha512-rfEmrSa/x0vArY1aFnVTBAmy6b2I0oNHONL59qR+vnsHfD5xacM40O4PSiVisERq/GmROjmS3Xo/ptp8fx823g==
+  dependencies:
+    opn "*"
 
 "@types/range-parser@*":
   version "1.2.3"
@@ -2218,6 +2225,11 @@ is-windows@^1.0.2:
   resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
   integrity sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==
 
+is-wsl@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/is-wsl/-/is-wsl-1.1.0.tgz#1f16e4aa22b04d1336b66188a66af3c600c3a66d"
+  integrity sha1-HxbkqiKwTRM2tmGIpmrzxgDDpm0=
+
 isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
@@ -2841,6 +2853,13 @@ once@^1.3.0, once@^1.3.1, once@^1.4.0:
   integrity sha1-WDsap3WWHUsROsF9nFC6753Xa9E=
   dependencies:
     wrappy "1"
+
+opn@*, opn@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/opn/-/opn-6.0.0.tgz#3c5b0db676d5f97da1233d1ed42d182bc5a27d2d"
+  integrity sha512-I9PKfIZC+e4RXZ/qr1RhgyCnGgYX0UEIlXgWnCOVACIvFgaC9rz6Won7xbdhoHrd8IIhV7YEpHjreNUNkqCGkQ==
+  dependencies:
+    is-wsl "^1.1.0"
 
 os-browserify@^0.3.0:
   version "0.3.0"

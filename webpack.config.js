@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 const path = require('path');
-const lib = path.resolve(__dirname, "lib");
+const lib = path.resolve(__dirname, "dist");
 
 const webpack = require('webpack');
 const merge = require('webpack-merge');
