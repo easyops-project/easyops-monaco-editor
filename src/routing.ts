@@ -17,7 +17,6 @@ const routes: IRoute[] = [
 
 function main() {
   const routeNav: HTMLElement | null = document.getElementById("routeNav");
-  console.log("route nav is " + routeNav);
   if (routeNav !== null) {
     let i: number = 0;
     routes.forEach(route => {
@@ -38,7 +37,7 @@ function main() {
   }
 }
 
-function setActiveRoute(routeName: string) {
+export function setActiveRoute(routeName: string) {
   const routeNav: HTMLElement | null = document.getElementById("routeNav");
 
   for (let i = 0; i < (routeNav?.children.length || 0); i++) {
@@ -48,6 +47,15 @@ function setActiveRoute(routeName: string) {
       element?.classList.remove("active");
     } else {
       element.classList.add("active");
+    }
+  }
+
+  const elements: HTMLCollectionOf<Element> = document.getElementsByClassName('route')
+  for (let i = 0; i < elements.length; i++) {
+    if (elements.item(i)?.id != routeName.toLowerCase()) {
+      (elements.item(i) as HTMLElement).hidden = true;
+    } else {
+      (elements.item(i) as HTMLElement).hidden = false;
     }
   }
 }

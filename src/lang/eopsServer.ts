@@ -164,7 +164,7 @@ export class EOPSServer {
         let text = textDocument.getText();
         let lines: string[] = text.split('\n');
         let diagnostics: Diagnostic[] = [];
-
+        console.log(`text: ${text}`)
         let validationErrors: IValidatorError[] = JSON.parse(Validate(text));
         // while ((m = pattern.exec(text)) && problems < settings.maxNumberOfProblems) {
 

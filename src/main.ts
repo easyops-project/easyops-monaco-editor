@@ -5,3 +5,4 @@ require("monaco-editor-core");
   getWorkerUrl: () => "./editor.worker.bundle.js"
 };
 require("./client");
+require("./maps")

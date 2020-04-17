@@ -3,7 +3,9 @@
   "name": "node-example",
   "version": "0.12.0",
   "dependencies": {
-    "@alanj1998/easyops-parser": "^1.0.12",
+    "@alanj1998/easyops-parser": "^1.0.18",
+    "@amcharts/amcharts4": "^4.9.12",
+    "@amcharts/amcharts4-geodata": "^4.1.14",
     "express": "^4.15.2",
     "file-loader": "^4.3.0",
     "monaco-editor-core": "^0.19.3",
@@ -12,6 +14,7 @@
     "opn": "^6.0.0",
     "reconnecting-websocket": "^3.2.2",
     "request-light": "^0.2.2",
+    "ts-debounce": "^2.0.1",
     "vscode-json-languageservice": "^3.4.11",
     "vscode-jsonrpc": "^5.0.0",
     "vscode-languageserver": "^5.2.1",

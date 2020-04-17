@@ -6,8 +6,7 @@ import * as express from "express";
 import * as rpc from "vscode-ws-jsonrpc";
 import { launch } from "./lang/eops-server-launcher";
 const opn = require('opn')
-import { Validate } from '@alanj1998/easyops-parser'
-
+import { Validate, Parse } from '@alanj1998/easyops-parser'
 
 process.on('uncaughtException', function (err: any) {
     console.error('Uncaught Exception: ', err.toString());
@@ -57,9 +56,13 @@ server.on('upgrade', (request: http.IncomingMessage, socket: net.Socket, head: B
             try {
                 webSocket.on('message', (data) => {
                     const msg: { code: string } = JSON.parse(data)
-                    const res = Validate(msg.code)
+                    const res = Validate(msg.code || '')
 
-                    webSocket.send(JSON.stringify({ errors: res }))
+                    if (JSON.parse(res).length == 0) {
+                        const res = Parse(msg.code)
+                        webSocket.send(JSON.stringify({ parsedOutput: res }))
+                    } else
+                        webSocket.send(JSON.stringify({ errors: res }))
                 })
             } catch (error) {
                 webSocket.send(error)

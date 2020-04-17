@@ -5,8 +5,16 @@ import {
 } from 'monaco-languageclient';
 import normalizeUrl = require('normalize-url');
 import { IValidationError } from './IValidationError';
+import { addServer, clearResources } from './maps'
+import { setActiveRoute } from './routing';
 const ReconnectingWebSocket = require('reconnecting-websocket');
+// import { debounce } from "ts-debounce"
 
+// const getCode = debounce(() => {
+//     const text: string = editor.getValue();
+
+//     parserWebSocket.send(JSON.stringify({ code: text }))
+// })
 // register Monaco languages
 monaco.languages.register({
     id: "eops",
@@ -66,6 +74,7 @@ const parserWebSocket = createWebSocket(parserUrl)
 parserWebSocket.addEventListener('open', (conn) => {
     editor.onDidChangeModelContent((e) => {
         const text: string = editor.getValue();
+        console.log(text)
 
         parserWebSocket.send(JSON.stringify({ code: text }))
     })
@@ -81,31 +90,31 @@ function giveBackHighlightedHTML(error: IValidationError) {
     return html;
 }
 
-parserWebSocket.addEventListener('message', (conn) => {
-    console.log(conn.data)
+parserWebSocket.addEventListener('message', async (conn) => {
     const data = JSON.parse(conn.data)
-    const messages: IValidationError[] = JSON.parse(data.errors)
-    const element: HTMLDivElement = document.getElementById('output') as HTMLDivElement
-    console.log(messages)
-    let html = '<div class="errorLine mx-3">'
 
-    for (let i = 0; i < messages.length; i++) {
-        let currentError: IValidationError = messages[i];
-        let severity: string = "";
+    if (data.errors) {
+        const messages: IValidationError[] = JSON.parse(data.errors)
+        const element: HTMLDivElement = document.getElementById('output') as HTMLDivElement
+        let html = '<div class="errorLine mx-3">'
 
-        switch (currentError.severity) {
-            case 'Error':
-                severity = '<i style="color: red">error </i>';
-                break;
-            case 'Info':
-                severity = '<i style="color: blue">info </i>';
-                break;
-            case 'Warning':
-                severity = '<i style="color: orange">warning </i>';
-                break;
-        }
+        for (let i = 0; i < messages.length; i++) {
+            let currentError: IValidationError = messages[i];
+            let severity: string = "";
 
-        html += `
+            switch (currentError.severity) {
+                case 'Error':
+                    severity = '<i style="color: red">error </i>';
+                    break;
+                case 'Info':
+                    severity = '<i style="color: blue">info </i>';
+                    break;
+                case 'Warning':
+                    severity = '<i style="color: orange">warning </i>';
+                    break;
+            }
+
+            html += `
         <div class="row mt-4">
             <h6 style="color: white">Line ${currentError.lineNumber}:${currentError.characterIndex} -> ${severity} <span style="color: grey">${currentError.errorCode}</span>: ${currentError.errorMessage}</h6>
         </div>
@@ -121,10 +130,25 @@ parserWebSocket.addEventListener('message', (conn) => {
             <h6 style="color: darkgoldenrod;">${currentError.hint}</h6>
         </div>
         `
-    }
+        }
 
-    html += "</div>"
-    element.innerHTML = html;
+        html += "</div>"
+        element.innerHTML = html;
+
+        setActiveRoute('Output')
+    } else if (data.parsedOutput) {
+        const element: HTMLDivElement = document.getElementById('output') as HTMLDivElement
+        element.innerHTML = ""
+        const resArr = JSON.parse(data.parsedOutput)
+        clearResources();
+        for (const resource of resArr) {
+            if (resource.type === "Virtual_Machine") {
+                await addServer(resource)
+            }
+        }
+
+        setActiveRoute('Map')
+    }
 })
 
 
