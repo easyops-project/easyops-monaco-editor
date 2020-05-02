@@ -7,6 +7,8 @@ import * as rpc from "vscode-ws-jsonrpc";
 import { launch } from "./lang/eops-server-launcher";
 const opn = require("opn");
 import { Validate, Parse } from "@alanj1998/easyops-parser";
+import { writeFileSync } from "fs";
+import { json } from "body-parser";
 
 process.on("uncaughtException", function (err: any) {
   console.error("Uncaught Exception: ", err.toString());
@@ -19,6 +21,13 @@ process.on("uncaughtException", function (err: any) {
 const app = express();
 // server the static content, i.e. index.html
 app.use(express.static(__dirname));
+app.use(json());
+app.post("/save", (req, res) => {
+  const { code }: { code: string } = req.body;
+
+  writeFileSync("code.eops", code);
+  res.sendStatus(200);
+});
 // start the server
 
 export function startServer() {

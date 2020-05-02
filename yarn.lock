@@ -3,9 +3,9 @@
 
 
 "@alanj1998/easyops-parser@^1.0.18":
-  version "1.0.19"
-  resolved "https://npm.pkg.github.com/download/@alanj1998/easyops-parser/1.0.19/c51b138cf8e72a1c3cc102df6e763fcfad90c2d9f608cb2c20e719d4f6909c3e#b88b262a018469127920dbb4834ef4a7ff6b4c30"
-  integrity sha512-BZHAfEAkU+fYnY8p0GSn8k4IgvY6XqNTZcm6KoWoYxeIZdWJZiaFlwjNQJJQxrZYkvGIgEpqjhefYYc+ntZPYw==
+  version "1.0.37"
+  resolved "https://npm.pkg.github.com/download/@alanj1998/easyops-parser/1.0.37/38079bf12742c41732df7c6035939c45b1132a0bbec45d60620004936dfc1882#5a33616f9a066ba13091609e33e0170202e2921a"
+  integrity sha512-zH9QgYrJFG/f3ZFVcJ9M3bnfuIaMRpOwF7oye98ZWBM/g9d5PWpn8Qe7o2sSTi4/6TetJZiWxa8C3SRjJ/7Lew==
   dependencies:
     node-addon-api "^1.7.1"
 
@@ -492,7 +492,7 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
   integrity sha512-ItfYfPLkWHUjckQCk8xC+LwxgK8NYcXywGigJgSwOP8Y2iyWT4f2vsZnoOXTTbo+o5yXmIUJ4gn5538SO5S3gA==
 
-body-parser@1.19.0:
+body-parser@1.19.0, body-parser@^1.19.0:
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.19.0.tgz#96b2709e57c9c4e09a6fd66a8fd979844f69f08a"
   integrity sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==

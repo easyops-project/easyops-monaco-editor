@@ -11,6 +11,9 @@ import { IValidationError } from "./IValidationError";
 import { addServer, clearResources } from "./maps";
 import { setActiveRoute } from "./routing";
 const ReconnectingWebSocket = require("reconnecting-websocket");
+
+let isInRequest: boolean = false;
+let latestRequest = {};
 // import { debounce } from "ts-debounce"
 
 // const getCode = debounce(() => {
@@ -27,9 +30,10 @@ monaco.languages.register({
 monaco.languages.setMonarchTokensProvider("eops", {
   tokenizer: {
     root: [
-      [/(using|create|called|with|AND)/, "keyword.other.eops"],
-      [/(allowed_in|allowed_out|location|)/, "entity.name.type"],
-      [/    (os|cores|ram|disks:|gpus:|vpc|optimisation)/, "entity.name.type"],
+      [/(using|create|called) /, "keyword.other.eops"],
+      [/(with|AND)/, "keyword.other.eops"],
+      [/(allowed_in|allowed_out|located_in|) /, "keyword.other.eops"],
+      [/(os|cores|ram|disks:|gpus:|vpc|optimisation) /, "keyword.other.eops"],
     ],
   },
 });
@@ -77,7 +81,6 @@ const parserWebSocket = createWebSocket(parserUrl);
 parserWebSocket.addEventListener("open", (conn) => {
   editor.onDidChangeModelContent((e) => {
     const text: string = editor.getValue();
-    console.log(text);
 
     parserWebSocket.send(JSON.stringify({ code: text }));
   });
@@ -212,3 +215,28 @@ function createWebSocket(url: string): WebSocket {
   };
   return new ReconnectingWebSocket(url, [], socketOptions);
 }
+
+async function saveCode(): Promise<void> {
+  const code = editor.getValue();
+
+  if (code.length > 1) {
+    const res = await fetch("http://localhost:3000/save", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({ code: editor.getValue() }),
+    });
+
+    if (res.ok) {
+      alert("Code saved to " + __dirname + "/code.eops");
+    } else {
+      alert("Code failed to save.");
+    }
+  } else {
+    alert("Write some code before saving.");
+  }
+}
+
+const el = document.getElementById("saveIcon");
+if (el !== null) el.onclick = saveCode;

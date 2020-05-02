@@ -1,45 +1,51 @@
-import * as am4core from "@amcharts/amcharts4/core"
-import * as am4maps from "@amcharts/amcharts4/maps"
-import am4themes_animated from "@amcharts/amcharts4/themes/animated"
-import am4geodata_worldUltra from "@amcharts/amcharts4-geodata/worldUltra"
-import { IVMSpec } from "./IVMSpec.interface"
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4maps from "@amcharts/amcharts4/maps";
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import am4geodata_worldUltra from "@amcharts/amcharts4-geodata/worldUltra";
+import { IVMSpec } from "./IVMSpec.interface";
 
-am4core.useTheme(am4themes_animated)
-const container = am4core.create('map', am4core.Container);
+am4core.useTheme(am4themes_animated);
+const container = am4core.create("map", am4core.Container);
 container.layout = "vertical";
 container.width = am4core.percent(100);
 container.height = am4core.percent(100);
 
 // map
 const map = container.createChild(am4maps.MapChart);
-const switchBetweenGlobeAndMap = map.createChild(am4core.SwitchButton)
-switchBetweenGlobeAndMap.align = 'right';
+const switchBetweenGlobeAndMap = map.createChild(am4core.SwitchButton);
+switchBetweenGlobeAndMap.align = "right";
 switchBetweenGlobeAndMap.marginTop = 20;
 switchBetweenGlobeAndMap.marginRight = 20;
 switchBetweenGlobeAndMap.valign = "top";
 (switchBetweenGlobeAndMap.leftLabel as am4core.Label).text = "Map";
 (switchBetweenGlobeAndMap.rightLabel as am4core.Label).text = "Globe";
-(switchBetweenGlobeAndMap.leftLabel as am4core.Label).fill = am4core.color("#fff");
-(switchBetweenGlobeAndMap.rightLabel as am4core.Label).fill = am4core.color("#fff");
+(switchBetweenGlobeAndMap.leftLabel as am4core.Label).fill = am4core.color(
+  "#fff"
+);
+(switchBetweenGlobeAndMap.rightLabel as am4core.Label).fill = am4core.color(
+  "#fff"
+);
 
 switchBetweenGlobeAndMap.events.on("toggled", () => {
-    if (switchBetweenGlobeAndMap.isActive) {
-        map.projection = new am4maps.projections.Orthographic;
-        map.panBehavior = "rotateLongLat";
-    }
-    else {
-        map.projection = new am4maps.projections.Mercator;
-        map.panBehavior = "move";
-    }
-})
+  if (switchBetweenGlobeAndMap.isActive) {
+    map.projection = new am4maps.projections.Orthographic();
+    map.panBehavior = "rotateLongLat";
+  } else {
+    map.projection = new am4maps.projections.Mercator();
+    map.panBehavior = "move";
+  }
+});
 try {
-    map.geodata = am4geodata_worldUltra;
+  map.geodata = am4geodata_worldUltra;
+} catch (e) {
+  map.raiseCriticalError(
+    new Error(
+      "Map geodata could not be loaded. Please download the latest amcharts geodata and extract its contents into the same directory as your amCharts files."
+    )
+  );
 }
-catch (e) {
-    map.raiseCriticalError(new Error("Map geodata could not be loaded. Please download the latest amcharts geodata and extract its contents into the same directory as your amCharts files."));
-}
-map.projection = new am4maps.projections.Mercator;
-map.panBehavior = "move"
+map.projection = new am4maps.projections.Mercator();
+map.panBehavior = "move";
 // prevent dragging
 map.seriesContainer.draggable = true;
 map.seriesContainer.resizable = false;
@@ -70,54 +76,50 @@ image.verticalCenter = "middle";
 
 let label = imageTemplate.createChild(am4core.Label);
 label.text = "{label}";
-label.fill = am4core.color('#fff')
+label.fill = am4core.color("#fff");
 label.horizontalCenter = "middle";
 label.verticalCenter = "top";
 label.dy = 20;
 
 export function clearResources() {
-    imageSeries.data = []
+  imageSeries.data = [];
 }
 export async function addServer(serverSpec: IVMSpec) {
-    console.log('add server called')
-    console.log(serverSpec)
-    let icon = "assets/cloud-computing.svg"
-    let location = await reverseGeo(serverSpec.location)
-    console.log(location)
-    // imageSeries.data.push()
-    for (const data of imageSeries.data) {
-        if (data.label === serverSpec.name) {
-            const index = imageSeries.data.indexOf(data)
-            imageSeries.data.splice(index, 1)
-        }
+  let icon = "assets/cloud-computing.svg";
+  let location = await reverseGeo(serverSpec.location);
+  for (const data of imageSeries.data) {
+    if (data.label === serverSpec.name) {
+      const index = imageSeries.data.indexOf(data);
+      imageSeries.data.splice(index, 1);
     }
-    imageSeries.addData(
-        {
-            latitude: location.lat,
-            longitude: location.lon,
-            imageUrl: icon,
-            width: 32,
-            height: 32,
-            label: serverSpec.name
-        }
-    )
+  }
+  imageSeries.addData({
+    latitude: location.lat,
+    longitude: location.lon,
+    imageUrl: icon,
+    width: 32,
+    height: 32,
+    label: serverSpec.name,
+  });
 }
 
-async function reverseGeo(loc: string): Promise<{ lat: number, lon: number }> {
-    try {
-        const res = await fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + loc, {
-            method: "GET",
-            mode: 'cors'
-        })
+async function reverseGeo(loc: string): Promise<{ lat: number; lon: number }> {
+  try {
+    const res = await fetch(
+      "https://nominatim.openstreetmap.org/search?format=json&q=" + loc,
+      {
+        method: "GET",
+        mode: "cors",
+      }
+    );
 
-        const body = await res.json();
-        console.log(body)
+    const body = await res.json();
 
-        return {
-            lat: Number.parseFloat(body[0].lat),
-            lon: Number.parseFloat(body[0].lon)
-        }
-    } catch (error) {
-        throw error;
-    }
+    return {
+      lat: Number.parseFloat(body[0].lat),
+      lon: Number.parseFloat(body[0].lon),
+    };
+  } catch (error) {
+    throw error;
+  }
 }

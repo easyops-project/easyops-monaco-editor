@@ -1,29 +1,21 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "declarationMap": true,
-        "inlineSources": false,
-        "declaration": true,
-        "stripInternal": true,
-        "lib": [
-            "es2016",
-            "dom"
-        ],
-        "strict": true,
-        "noImplicitReturns": true,
-        "noUnusedLocals": true,
-        "rootDir": "src",
-        "outDir": "dist",
-        "baseUrl": ".",
-        "skipLibCheck": true
-    },
-    "include": [
-        "src"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "declarationMap": true,
+    "inlineSources": false,
+    "declaration": true,
+    "stripInternal": true,
+    "lib": ["es2016", "dom"],
+    "strict": true,
+    "noImplicitReturns": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "skipLibCheck": true
+  },
+  "include": ["src", "index.ts", "index.d.ts"],
+  "exclude": ["node_modules"]
 }
