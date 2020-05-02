@@ -1,6 +1,6 @@
 {
   "name": "@alanj1998/easyops-monaco-editor",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "dependencies": {
     "@alanj1998/easyops-parser": "^1.0.18",
     "@amcharts/amcharts4": "^4.9.12",
